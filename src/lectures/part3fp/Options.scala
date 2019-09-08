@@ -1,6 +1,7 @@
 package lectures.part3fp
 
 import java.util.Random
+import scala.language.postfixOps
 
 /**
   * Created by Daniel.
@@ -22,7 +23,8 @@ object Options extends App {
   def backupMethod(): String = "A valid result"
   val chainedResult = Option(unsafeMethod()).orElse(Option(backupMethod()))
 
-  // DESIGN unsafe APIs
+
+  // REDESIGN unsafe APIs
   def betterUnsafeMethod(): Option[String] = None
   def betterBackupMethod(): Option[String] = Some("A valid result")
   val betterChainedResult = betterUnsafeMethod() orElse betterBackupMethod()
@@ -30,7 +32,7 @@ object Options extends App {
 
   // functions on Options
   println(myFirstOption.isEmpty)
-  println(myFirstOption.get)  // USAFE - DO NOT USE THIS
+  println(myFirstOption.get)  // UNSAFE - DO NOT USE THIS
 
   // map, flatMap, filter
   println(myFirstOption.map(_ * 2))
@@ -99,6 +101,4 @@ object Options extends App {
     connection <- Connection(host, port)
   } yield connection.connect
   forConnectionStatus.foreach(println)
-
-
 }

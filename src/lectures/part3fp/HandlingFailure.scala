@@ -87,6 +87,13 @@ object HandlingFailure extends App {
     html <- connection.getSafe("/home")
   } renderHTML(html)
 
+  //
+  val renderedHTML = for {
+    connection <- HttpService.getSafeConnection(host, port)
+    html <- connection.getSafe("/home")
+  } yield html
+  println(renderedHTML)
+
   /*
     try {
       connection = HttpService.getConnection(host, port)
